@@ -8,14 +8,15 @@
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/forms.css">
   <style>
-    #container {
-        border-radius: 5px;
-        min-height: 40px;
-        border:1px solid black;
+    #container{
+        border-radius:5px;
+        min-height:40px;
+        border: 1px solid black;
         margin:auto;
         width: 50%;
-        font-size: x-large;
+        font-size:x-large;
     }
+
   </style>
  </head>
  <body>
@@ -27,31 +28,33 @@
             <a href="#">Link</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
         </nav>
-     </header>
-     
-   <main class="wrapper">
-    <h3>Welcome to the "Get Even" page!<br> <br> The main focus of this page is a form that allows you to input information and get a response. The page provides a clean and straightforward user interface, ensuring a seamless experience. The primary feature of this page is the form located below the heading "Place form code below." The form consists of a single input field labeled "input" and a submit button. You can type information into the input field, and upon clicking the "Submit" button, the page will process the information and display a response.
 
-        Once you submit the form, the page will reload, and the information you entered will be displayed below the form in a container with rounded borders. For instance, if you entered a value in the input field, the page will show a message indicating what you typed.</h3>
+     </header>
+   <main class="wrapper">
+  <h3>What is Get Even?</h3>  
+    <p class="page-description">Welcome to Get Even! This page allows you to determine whether a number is even or odd. Simply enter a number in the input field below, and click the submit button to get the result.</p>
+     
+ 
     <h2 class="subheader">Place form code below:</h2>
-        <div id="output">
-        <form method="get" action="" class="main-form">
-        <div>
-            <label for="input">input</label><br>
-            <input type="text" name="input" id="input" placeholder="input" requiredAutofocus>
-        </div>
-        <div>
-            <input type="submit" id="submit">
-        </div>
-        
-        </form>
+    <div id="output">
+    <form method="get" action="" class="main-form">
+      <div>
+        <label for="input">input</label><br>
+        <input type="text" name="input" id="input" placeholder="input" requiredAutofocus>
+      </div>
+      <div>
+        <input type="submit" id="submit">
+      </div>
+    </form>
     </div>
     <h3>Page Origins</h3>
     <p>The HTML/CSS comes from Sara Newman's Web Fundamentals class as taught at Seattle Central. This page provides a basis for students to build a responsive portal page.</p>
     <p>The mobile navigation originates from <a href="https://www.w3schools.com/howto/howto_js_mobile_navbar.asp" target="_blank">W3Schools</a></p>
+
+
     <footer>
       <p><small>&copy; 2021-<span id="this-year"></span> by 
-          YOUR NAME HERE, All Rights Reserved ~ 
+          Cristian Reyes Chavez, All Rights Reserved ~ 
           <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
           <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
      </p>
@@ -60,23 +63,37 @@
   <script src="js/main.js"></script>   
   <script>
 
-    const queryString = window.location.search;
-    console.log(queryString)
-
-    const urlParams = new URLSearchParams(queryString);
-
-    if (queryString.length > 0){
-        let myOutput = `<div id="container">`;
-        if(urlParams.has("input")) {
-            let myInput = urlParams.get("input");
-            // Shows our input
-            myOutput += `<p>You typed ${myInput}</p>`;
-        }
-        // Append to it. 
-        myOutput += `</div>`;
-        document.querySelector("#output").innerHTML = myOutput
+    function getEven(num){
+      if(num % 2==0){//even!
+        return true;
+      }else{
+        return false;
+      }
     }
 
+const queryString = window.location.search;
+console.log(queryString);
+
+const urlParams = new URLSearchParams(queryString);
+
+    if(queryString.length > 0){//data submitted
+      let myOutput = `<div id="container">`;
+       if(urlParams.has("input")){
+         //alert(urlParams.get("input"));
+         let myInput = urlParams.get("input");
+
+        if(getEven(myInput)){//even
+          myOutput += `<p>You typed <b>${myInput}</b> and it's an even number!</p>`;
+        }else{//odd
+          myOutput += `<p>You typed <b>${myInput}</b> and it's an odd number!</p>`;
+        }
+        
+       }
+
+       myOutput += `<p><a href="index.html">CLEAR</a></p>`;
+       myOutput += `</div>`;
+       document.querySelector("#output").innerHTML = myOutput;
+    }
   </script>
  </body>
 </html>
